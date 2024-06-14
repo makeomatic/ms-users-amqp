@@ -44,7 +44,7 @@ exports.token = {
       length: 4,
       type: 'number',
     },
-    throttle: 5 * 60, // dont send sms more than once in 5 minutes
+    throttle: 20, // dont send sms more than once in 20 seconds
     ttl: 10 * 60,
     regenerate: true,
   },
