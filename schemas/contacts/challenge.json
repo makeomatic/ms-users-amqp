@@ -12,7 +12,9 @@
     },
     "contact": {
       "$ref": "common.json#/definitions/contact",
-      "required": ["value"]
+      "required": [
+        "value"
+      ]
     },
     "i18nLocale": {
       "type": "string",
@@ -20,7 +22,12 @@
       "maxLength": 10
     },
     "metadata": {
-      "type": "object"
+      "type": "object",
+      "properties": {
+        "updateUsername": {
+          "type": "boolean"
+        }
+      }
     }
   }
 }

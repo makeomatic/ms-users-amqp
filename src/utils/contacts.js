@@ -166,7 +166,8 @@ async function challenge({ userId, contact, i18nLocale, metadata = {} }) {
 async function verifyEmail({ secret }) {
   const { redis, tokenManager } = this;
   const { metadata } = await tokenManager.verify(secret);
-  const { userId, contact } = metadata;
+  const { userId, contact, metadata: tokenMetadata } = metadata;
+  const { updateUsername } = tokenMetadata;
   const lock = await this.dlock.manager.once(lockContact(contact.value));
   const key = redisKey(userId, USERS_CONTACTS, contact.value);
 
@@ -175,7 +176,7 @@ async function verifyEmail({ secret }) {
     if (this.config.contacts.onlyOneVerifiedEmail) {
       await removeAllEmailContactsOfUser.call(this, pipe, userId, contact.value);
     }
-    if (this.config.contacts.updateUsername) {
+    if (updateUsername) {
       await replaceUserName.call(this, pipe, userId, contact.value);
     }
     pipe.hset(key, 'verified', 'true');
