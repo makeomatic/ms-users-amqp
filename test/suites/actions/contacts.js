@@ -255,6 +255,7 @@ describe('#user contacts', function registerSuite() {
       },
       metadata: {
         name: 'Test',
+        updateUsername: true,
       },
     };
 
